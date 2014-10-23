@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <target>System.out</target>
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="INSERT_ALL_LOGGER" class="dbtest.standalone.DateSuffixFileAppender">
+    <file>./logs/insert_all_###.log</file>
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="INSERT_SUCCESS_LOGGER" class="dbtest.standalone.DateSuffixFileAppender">
+    <file>./logs/insert_success_###.log</file>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>INFO</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <appender name="INSERT_FAIL_LOGGER" class="dbtest.standalone.DateSuffixFileAppender">
+    <file>./logs/insert_fail_###.log</file>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>ERROR</level>
+    </filter>
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <logger name="dbtest.standalone.InsertionInvoker" level="INFO">
+    <appender-ref ref="INSERT_SUCCESS_LOGGER"/>
+    <appender-ref ref="INSERT_FAIL_LOGGER"/>
+  </logger>
+
+  <root level="INFO">
+    <appender-ref ref="STDOUT"/>
+    <appender-ref ref="INSERT_ALL_LOGGER"/>
+  </root>
+</configuration>

@@ -1,0 +1,45 @@
+apply plugin:'application'
+
+sourceCompatibility = targetCompatibility = 1.8
+
+jar {
+  baseName = 'dbtest-standalone'
+  version = '0.0.1-SNAPSHOT'
+  archiveName = baseName + '.jar'
+  manifest {
+    attributes(
+      "Implementation-Title": baseName,
+      "Implementation-Version": version,
+      "Author": "ytanabe")
+  }
+}
+
+mainClassName = "dbtest.standalone.App"
+
+run {
+  if (project.hasProperty('args')) {
+    args project.args.split('\\s+')
+  }
+}
+
+repositories {
+  mavenCentral()
+}
+
+ext {
+  expectedGradleVersion = "2.1"
+}
+
+dependencies {
+  compile("commons-dbcp:commons-dbcp:1.4")
+  compile("args4j:args4j:2.0.29")
+  compile("org.slf4j:slf4j-api:1.7.7")
+  compile "ch.qos.logback:logback-classic:1.1.2"
+  compile("org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16")
+
+  runtime("org.postgresql:postgresql:9.3-1102-jdbc41")
+}
+
+task wrapper(type: Wrapper) {
+  gradleVersion = expectedGradleVersion
+}
