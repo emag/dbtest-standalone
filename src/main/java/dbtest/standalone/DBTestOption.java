@@ -18,8 +18,11 @@ public class DBTestOption {
   @Option(name = "-d", aliases = "--disable-clear", usage = "DB のデータを初期化しない(デフォルト false)")
   private boolean disableClear = false;
 
-  @Option(name = "-s", aliases = "--sleep", metaVar = "<time>", usage = "次回クエリ実行前のスリープ時間。単位: μs(デフォルト 10000 μs)")
+  @Option(name = "-s", aliases = "--sleep", metaVar = "<time>", usage = "次回クエリ実行前のスリープ時間。単位: μs (デフォルト 10000 μs)")
   private int sleep = 10_000;
+
+  @Option(name = "-l", aliases = "--loop", usage = "ループモード(デフォルト false)")
+  private boolean loop = false;
 
   public int getConcurrency() {
     return concurrency;
@@ -35,6 +38,10 @@ public class DBTestOption {
 
   public int getSleep() {
     return sleep;
+  }
+
+  public boolean isLoop() {
+    return loop;
   }
 
   public static DBTestOption getOption(String... args) {
