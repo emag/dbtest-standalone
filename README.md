@@ -3,7 +3,13 @@
 ## 前提条件
 
 * JDK 8
-* PostgreSQL 9.2.6, 9.3.5 でテスト
+
+## 動作確認環境
+
+* PostgreSQL
+ * 9.2.4
+ * 9.2.6
+ * 9.3.5
 
 ## 利用方法
 
@@ -90,18 +96,18 @@ Total time: 2.798 secs
 
 `[YYYY-MM-DD'T'hh:mm:ss.SSS]` は試験実行時の時刻です。
 
-ファイル名                                     |内容
-----------------------------------------------|----------------------------------------------
-insert\_all_[YYYY-MM-DD'T'hh:mm:ss.SSS].log    |試験の開始から終了まで全てのログ(標準出力分は含まない)
-insert\_fail_[YYYY-MM-DD'T'hh:mm:ss.SSS].log   |データ挿入成功のみのログ
-insert\_success_[YYYY-MM-DD'T'hh:mm:ss.SSS].log|データ挿入失敗のみのログ
+ファイル名                                      | 内容
+-----------------------------------------------|--------------------------------------------------
+insert\_all_[YYYY-MM-DD'T'hh:mm:ss.SSS].log    | 試験の開始から終了まで全てのログ(標準出力分は含まない)
+insert\_fail_[YYYY-MM-DD'T'hh:mm:ss.SSS].log   | データ挿入成功のみのログ
+insert\_success_[YYYY-MM-DD'T'hh:mm:ss.SSS].log| データ挿入失敗のみのログ
 
 ### 試験サマリ
 
-項目名                   |内容
+項目名                   | 内容
 ------------------------|-------------------------------------------
 Insert success          | 挿入成功カウント数
 Insert failure          | 挿入失敗カウント数
 Insert total            | 全挿入カウント数
-Count Via JDBC          |JDBC API のメソッドの返り値(挿入行)の集計
+Count Via JDBC          | JDBC API のメソッドの返り値(挿入行)の集計
 Actual number of records| `SELECT count(*) FROM test_table;` の結果
