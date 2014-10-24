@@ -54,11 +54,12 @@ password=
 初回はライブラリのダウンロードがあるため時間がかかります。
 
 ~~~ sh
-./gradlew run -Pargs="-n <requests>"
+./gradlew run -Pargs="-n <request-time> -s <time>"
 ~~~
 
 ~~~ sh
 -n (--requests) <requests> : クエリ実行回数(デフォルト 1)
+-s (--sleep) <time>        : 次回クエリ実行前のスリープ時間。単位: μs(デフォルト 10000 μs)
 ~~~
 
 ## 詳細
@@ -71,23 +72,24 @@ password=
 :processResources UP-TO-DATE
 :classes UP-TO-DATE
 :run
-09:14:38.130 [main] INFO  dbtest.standalone.App - [DBTest begin]
-09:14:38.222 [main] INFO  dbtest.standalone.DataSourceFactory - DataSource initialized.
-09:14:38.323 [main] INFO  dbtest.standalone.App - Data cleared
-09:14:38.333 [pool-1-thread-1] INFO  dbtest.standalone.InsertionInvoker - [Insert success] COUNT_TOTAL: 1, COUNT_SUCCESS: 1, COUNT_FAILURE: 0
-09:14:38.344 [pool-1-thread-1] INFO  dbtest.standalone.InsertionInvoker - [Insert success] COUNT_TOTAL: 2, COUNT_SUCCESS: 2, COUNT_FAILURE: 0
+13:25:44.460 [main] INFO  dbtest.standalone.App - [DBTest begin]
+13:25:44.478 [main] INFO  dbtest.standalone.App - sleep time: 10000 μs
+13:25:44.542 [main] INFO  dbtest.standalone.DataSourceFactory - DataSource initialized.
+13:25:44.621 [main] INFO  dbtest.standalone.App - Data cleared
+13:25:44.632 [pool-1-thread-1] INFO  dbtest.standalone.InsertionInvoker - [Insert success] COUNT_TOTAL: 1, COUNT_SUCCESS: 1, COUNT_FAILURE: 0
+13:25:44.654 [pool-1-thread-1] INFO  dbtest.standalone.InsertionInvoker - [Insert success] COUNT_TOTAL: 2, COUNT_SUCCESS: 2, COUNT_FAILURE: 0
 [...]
-09:14:38.433 [pool-1-thread-1] INFO  dbtest.standalone.InsertionInvoker - [Insert success] COUNT_TOTAL: 10, COUNT_SUCCESS: 10, COUNT_FAILURE: 0
-09:14:38.459 [main] INFO  dbtest.standalone.App - Insert success: 10
-09:14:38.460 [main] INFO  dbtest.standalone.App - Insert failure: 0
-09:14:38.460 [main] INFO  dbtest.standalone.App - Insert total: 10
-09:14:38.460 [main] INFO  dbtest.standalone.App - Count Via JDBC: 10
-09:14:38.471 [main] INFO  dbtest.standalone.App - Actual number of records 10
-09:14:38.471 [main] INFO  dbtest.standalone.App - [DBTest end]
+13:25:44.832 [pool-1-thread-1] INFO  dbtest.standalone.InsertionInvoker - [Insert success] COUNT_TOTAL: 10, COUNT_SUCCESS: 10, COUNT_FAILURE: 0
+13:25:44.869 [main] INFO  dbtest.standalone.App - Insert success: 10
+13:25:44.869 [main] INFO  dbtest.standalone.App - Insert failure: 0
+13:25:44.869 [main] INFO  dbtest.standalone.App - Insert total: 10
+13:25:44.869 [main] INFO  dbtest.standalone.App - Count Via JDBC: 10
+13:25:44.877 [main] INFO  dbtest.standalone.App - Actual number of records: 10
+13:25:44.878 [main] INFO  dbtest.standalone.App - [DBTest end]
 
 BUILD SUCCESSFUL
 
-Total time: 2.798 secs
+Total time: 2.817 secs
 ~~~
 
 ### ログ

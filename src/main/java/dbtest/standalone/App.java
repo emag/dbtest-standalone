@@ -39,12 +39,14 @@ public class App {
     LOGGER.info("Insert failure: {}", countFailure.get());
     LOGGER.info("Insert total: {}", countTotal.get());
     LOGGER.info("Count Via JDBC: {}", countViaJdbc);
-    LOGGER.info("Actual number of records {}", getActualNumberOfRecords());
+    LOGGER.info("Actual number of records: {}", getActualNumberOfRecords());
 
     LOGGER.info("[DBTest end]");
   }
 
   public static int invoke(DBTestOption option) {
+    LOGGER.info("sleep time: {} μs", option.getSleep());
+    
     if (option.isClear()) {
       clearData();
     }
@@ -53,7 +55,7 @@ public class App {
     List<Callable<Integer>> tasks = new ArrayList<>();
 
     for (int i = 0; i < option.getRequests(); i++) {
-      InsertionInvoker task = new InsertionInvoker();
+      InsertionInvoker task = new InsertionInvoker(option.getSleep());
       tasks.add(task);
     }
 

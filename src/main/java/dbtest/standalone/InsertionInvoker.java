@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Yoshimasa Tanabe
@@ -15,6 +16,12 @@ public class InsertionInvoker implements Callable<Integer> {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(InsertionInvoker.class.getName());
   private static final String STATEMENT = "INSERT INTO test_table (id, value) VALUES (?, ?)";
+
+  private int sleep;
+
+  public InsertionInvoker(int sleep) {
+    this.sleep = sleep;
+  }
 
   @Override
   public Integer call() throws Exception {
@@ -40,6 +47,8 @@ public class InsertionInvoker implements Callable<Integer> {
       LOGGER.error("[Insert failure] COUNT_TOTAL: {}, COUNT_SUCCESS: {}, COUNT_FAILURE: {}, CAUSE: {}",
         App.countTotal.get(), App.countSuccess.get(), App.countFailure, e.getMessage());
     }
+
+    TimeUnit.MICROSECONDS.sleep(this.sleep);
 
     return insertedRowNum;
   }
