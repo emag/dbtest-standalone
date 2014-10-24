@@ -9,14 +9,17 @@ import org.kohsuke.args4j.Option;
  */
 public class DBTestOption {
 
-  @Option(name = "-c", aliases = "--concurrency", metaVar = "<concurrency>", usage = "実行スレッド数(デフォルト 1)")
+  @Option(name = "-c", aliases = "--concurrency", metaVar = "<concurrency-number>", usage = "実行スレッド数(デフォルト 1)")
   private int concurrency = 1;
 
-  @Option(name = "-n", aliases = "--requests", metaVar = "<requests>", usage = "クエリ実行回数(デフォルト 1)")
+  @Option(name = "-n", aliases = "--requests", metaVar = "<request-times>", usage = "クエリ実行回数(デフォルト 1)")
   private int requests = 1;
 
-  @Option(name = "-d", aliases = "--disable-clear", metaVar = "<disable-clear>", usage = "DB のデータを初期化しない(デフォルト false)")
+  @Option(name = "-d", aliases = "--disable-clear", usage = "DB のデータを初期化しない(デフォルト false)")
   private boolean disableClear = false;
+
+  @Option(name = "-s", aliases = "--sleep", metaVar = "<time>", usage = "次回クエリ実行前のスリープ時間。単位: μs(デフォルト 10000 μs)")
+  private int sleep = 10_000;
 
   public int getConcurrency() {
     return concurrency;
@@ -28,6 +31,10 @@ public class DBTestOption {
 
   public boolean isClear() {
     return ! disableClear;
+  }
+
+  public int getSleep() {
+    return sleep;
   }
 
   public static DBTestOption getOption(String... args) {
